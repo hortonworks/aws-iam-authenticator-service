@@ -44,10 +44,10 @@ build-docker:
 	docker run --rm ${USER_NS} -v "${PWD}":/go/src/${PROJECT} -w /go/src/${PROJECT} -e VERSION=${VERSION} -e GO111MODULE=on golang:1.11 make build
 
 build-darwin:
-	GOOS=darwin CGO_ENABLED=0 go build -a ${LDFLAGS} -o build/Darwin/${BINARY} main.go
+	GOOS=darwin CGO_ENABLED=0 go build -a ${LDFLAGS} -o build/Darwin/${BINARY} -mod=vendor main.go
 
 build-linux:
-	GOOS=linux CGO_ENABLED=0 go build -a ${LDFLAGS} -o build/Linux/${BINARY} main.go
+	GOOS=linux CGO_ENABLED=0 go build -a ${LDFLAGS} -o build/Linux/${BINARY} -mod=vendor main.go
 
 release-docker:
 	@USER_NS='-u $(shell id -u $(whoami)):$(shell id -g $(whoami))'
@@ -65,7 +65,12 @@ docker-image-build:
 	docker build -t ${DOCKER_IMAGE_NAME}:${VERSION} .
 
 docker-build-minikube:
+	$(shell eval $(minikube docker-env))
 	docker build -t ${NAME}:local .
 
 helm-install-minikube: docker-build-minikube
+	go mod vendor
 	helm upgrade --install ${NAME} helm/${NAME} -f helm/config-minikube.yml --namespace ${NAME} --timeout 60; \
+
+helm-install-minikube-portforward: helm-install-minikube
+	kubectl port-forward -n ${NAME} svc/${NAME} 8080

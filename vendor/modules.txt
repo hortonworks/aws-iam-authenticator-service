@@ -1,6 +1,6 @@
 # bou.ke/monkey v1.0.1
 bou.ke/monkey
-# github.com/aws/aws-sdk-go v1.15.62
+# github.com/aws/aws-sdk-go v1.15.81
 github.com/aws/aws-sdk-go/aws
 github.com/aws/aws-sdk-go/aws/credentials/stscreds
 github.com/aws/aws-sdk-go/aws/session
@@ -33,26 +33,24 @@ github.com/aws/aws-sdk-go/private/protocol
 # github.com/gogo/protobuf v1.1.1
 github.com/gogo/protobuf/proto
 github.com/gogo/protobuf/sortkeys
-# github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
-github.com/golang/glog
 # github.com/google/gofuzz v0.0.0-20170612174753-24818f796faf
 github.com/google/gofuzz
-# github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1
+# github.com/gopherjs/gopherjs v0.0.0-20181103185306-d547d1d9531e
 github.com/gopherjs/gopherjs/js
-# github.com/heptio/authenticator v0.3.0
-github.com/heptio/authenticator/pkg/token
-github.com/heptio/authenticator/pkg/arn
 # github.com/jmespath/go-jmespath v0.0.0-20160202185014-0b12d6b521d8
 github.com/jmespath/go-jmespath
 # github.com/jtolds/gls v4.2.1+incompatible
 github.com/jtolds/gls
-# github.com/konsorten/go-windows-terminal-sequences v0.0.0-20180402223658-b729f2633dfe
+# github.com/konsorten/go-windows-terminal-sequences v1.0.1
 github.com/konsorten/go-windows-terminal-sequences
-# github.com/sirupsen/logrus v1.1.1
+# github.com/kubernetes-sigs/aws-iam-authenticator v0.3.1-0.20181019024009-82544ec86140
+github.com/kubernetes-sigs/aws-iam-authenticator/pkg/token
+github.com/kubernetes-sigs/aws-iam-authenticator/pkg/arn
+# github.com/sirupsen/logrus v1.2.0
 github.com/sirupsen/logrus
 # golang.org/x/crypto v0.0.0-20180904163835-0709b304e793
 golang.org/x/crypto/ssh/terminal
-# golang.org/x/net v0.0.0-20181023162649-9b4f9f5ad519
+# golang.org/x/net v0.0.0-20181114220301-adae6a3d119a
 golang.org/x/net/http2
 golang.org/x/net/http/httpguts
 golang.org/x/net/http2/hpack
@@ -67,7 +65,7 @@ golang.org/x/text/unicode/norm
 golang.org/x/text/transform
 # gopkg.in/inf.v0 v0.9.1
 gopkg.in/inf.v0
-# k8s.io/apimachinery v0.0.0-20181015213631-60666be32c5d
+# k8s.io/apimachinery v0.0.0-20181121071008-d4f83ca2e260
 k8s.io/apimachinery/pkg/apis/meta/v1
 k8s.io/apimachinery/pkg/api/resource
 k8s.io/apimachinery/pkg/conversion
@@ -92,3 +90,5 @@ k8s.io/apimachinery/pkg/util/validation/field
 # k8s.io/client-go v9.0.0+incompatible
 k8s.io/client-go/pkg/apis/clientauthentication/v1alpha1
 k8s.io/client-go/pkg/apis/clientauthentication
+# k8s.io/klog v0.1.0
+k8s.io/klog
