@@ -7,6 +7,7 @@ BUILD_TIME=$(shell date +%FT%T)
 GOFILES_NOVENDOR = $(shell find . -type f -name '*.go' -not -path "./vendor/*" -not -path "./.git/*")
 DEBUG ?=false
 PORT ?= 8080
+LOCAL_FWD_PORT ?= 8082
 LDFLAGS=-ldflags "-X ${PROJECT}/config.Version=${VERSION} -X ${PROJECT}/config.BuildTime=${BUILD_TIME} -X ${PROJECT}/config.Debug=${DEBUG} -X ${PROJECT}/config.Port=${PORT}"
 
 deps: deps-errcheck
@@ -61,6 +62,9 @@ release: build
 	tar -zcvf release/cb-cli_${VERSION}_Darwin_x86_64.tgz -C build/Darwin "${BINARY}"
 	tar -zcvf release/cb-cli_${VERSION}_Linux_x86_64.tgz -C build/Linux "${BINARY}"
 
+check-minikube-context:
+	kubectl config use-context minikube
+
 docker-image-build:
 	docker build -t ${DOCKER_IMAGE_NAME}:${VERSION} .
 
@@ -68,9 +72,9 @@ docker-build-minikube:
 	$(shell eval $(minikube docker-env))
 	docker build -t ${NAME}:local .
 
-helm-install-minikube: docker-build-minikube
+helm-install-minikube: check-minikube-context docker-build-minikube
 	go mod vendor
 	helm upgrade --install ${NAME} helm/${NAME} -f helm/config-minikube.yml --namespace ${NAME} --timeout 60; \
 
 helm-install-minikube-portforward: helm-install-minikube
-	kubectl port-forward -n ${NAME} svc/${NAME} 8080
+	kubectl port-forward -n ${NAME} svc/${NAME} ${LOCAL_FWD_PORT}:8080
